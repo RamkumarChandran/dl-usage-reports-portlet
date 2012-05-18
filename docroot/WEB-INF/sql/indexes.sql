@@ -1,0 +1,1 @@
+create index IX_D4C36934 on DLUsage_AllocatedStorage (id_);

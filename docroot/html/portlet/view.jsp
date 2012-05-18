@@ -18,20 +18,58 @@
 
 <%
 String redirect = PortalUtil.getCurrentURL(renderRequest);
+long companyId = PortalUtil.getCompanyId(request);
+List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(companyId);		 
 %>
 
-<portlet:renderURL var="Url">
-	<portlet:param name="userGroupId" value="14701" />
-	<portlet:param name="redirect" value="<%= redirect %>" />
-	<portlet:param name="jspPage" value="/html/portlet/view_report.jsp" />
-</portlet:renderURL>
+<liferay-ui:search-container emptyResultsMessage="no-user-groups-were-found" delta="5">
+   	<liferay-ui:search-container-results>
+   	<%
+	    results = ListUtil.subList(userGroups, searchContainer.getStart(), searchContainer.getEnd());
+	    total = userGroups.size();
 
-<a href="<%=Url%>">ESU 10</a>
+	    pageContext.setAttribute("results", results);
+	    pageContext.setAttribute("total", total);
+    %>
+   	</liferay-ui:search-container-results>
 
-<portlet:renderURL var="testUrl">
-	<portlet:param name="userGroupId" value="21801" />
-	<portlet:param name="redirect" value="<%= redirect %>" />
-	<portlet:param name="jspPage" value="/html/portlet/view_report.jsp" />
-</portlet:renderURL>
+   	<liferay-ui:search-container-row
+   		className="com.liferay.portal.model.UserGroup"
+   		keyProperty="userGroupId"
+   		modelVar="userGroup">
 
-<a href="<%=testUrl%>">Test</a>
+	   <portlet:renderURL var="rowURL">
+			<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
+			<portlet:param name="userGroupId" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
+			<portlet:param name="jspPage" value="/html/portlet/view_report.jsp" />
+		</portlet:renderURL>
+
+		<liferay-ui:search-container-column-text
+			href="<%= rowURL %>"
+			name="name"
+			property="name"
+		/>
+
+		<liferay-ui:search-container-column-text
+			href="<%= rowURL %>"
+			name="description"
+			property="description"
+		/>
+		
+		<liferay-ui:search-container-column-text
+			href="<%= rowURL %>"
+			name="usage"
+			value="<%=DLUsageReportsUtil.convertToHumanReadableSize(
+					DLUsageReports.getTotalUserUsageByUserGroupId(userGroup.getUserGroupId())) %>"
+		/>
+		
+		<liferay-ui:search-container-column-jsp
+        		path="/html/portlet/user_groups/admin_actions.jsp"
+        		align="right"
+	    />
+
+      </liferay-ui:search-container-row>
+
+      <liferay-ui:search-iterator />
+
+</liferay-ui:search-container>

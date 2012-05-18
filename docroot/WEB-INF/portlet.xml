@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>dl-usage-reports</portlet-name>
 		<display-name>Document Library Usage Reports</display-name>
-		<portlet-class>org.gnenc.liferay.portlet.DLUsageReports</portlet-class>
+		<portlet-class>org.gnenc.dlusagereports.portlet.DLUsageReports</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/html/portlet/view.jsp</value>
@@ -13,9 +13,10 @@
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
+        <resource-bundle>content/Language</resource-bundle>
 		<portlet-info>
 			<title>Document Library Usage Reports</title>
-			<short-title>Document Library Usage Reports</short-title>
+			<short-title>DKL</short-title>
 			<keywords>Document Library Usage Reports</keywords>
 		</portlet-info>
 		<security-role-ref>

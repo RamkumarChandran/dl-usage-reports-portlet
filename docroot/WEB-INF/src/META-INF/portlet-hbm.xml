@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="org.gnenc.dlusagereports.model.AllocatedStorage" />
+	<class name="org.gnenc.dlusagereports.model.impl.AllocatedStorageImpl" table="DLUsage_AllocatedStorage">
+		<cache usage="read-write" />
+		<id name="id" column="id_" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="totalBytes" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="ModifiedUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>
