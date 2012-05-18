@@ -15,25 +15,23 @@
 %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+
 <%@ page import="org.gnenc.liferay.portlet.DLUsageReports" %>
+<%@ page import="org.gnenc.liferay.model.DLUser" %>
+
 <%@ page import="com.liferay.portal.model.User" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 <%@ page import="com.liferay.portal.theme.ThemeDisplay" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.RowChecker" %>
 
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.Iterator" %>
+<%@ page import="com.liferay.portal.kernel.util.ListUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.portal.service.UserGroupLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
+
+<%@ page import="java.util.Collections" %>
+<%@ page import="java.util.List" %>
 
 <portlet:defineObjects />
-
-This is the <b>Document Library Usage Reports</b> portlet.
-
-<%
-ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-//long size = DLUsageReports.totalSizeByCompanyId(themeDisplay.getCompanyId());
-Map<User,Long> reportMap = DLUsageReports.getUsageForUsersByUserGroup(15204);
-Iterator i = reportMap.entrySet().iterator();
-while (i.hasNext()) {
-	Map.Entry<User,Long> entry = (Map.Entry<User,Long>)i.next();
-	%><%=entry.getKey().getFullName()%> is using <%=entry.getValue() %> bytes <%
-}
-%>

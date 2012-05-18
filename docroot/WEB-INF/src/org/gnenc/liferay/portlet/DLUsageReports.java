@@ -1,8 +1,9 @@
 package org.gnenc.liferay.portlet;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import org.gnenc.liferay.model.DLUser;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -17,12 +18,11 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.util.bridges.mvc.MVCPortlet;
 
-public class DLUsageReports {
-	
-	
-	public static Map<User,Long> getUsageForUsersByUserGroup(long userGroupId) throws SystemException, PortalException {
-		Map<User,Long> reportMap = new HashMap<User, Long>();
+public class DLUsageReports extends MVCPortlet {
+	public static List<DLUser> getUsageForUsersByUserGroup(long userGroupId) throws SystemException, PortalException {
+		List<DLUser> usage = new ArrayList<DLUser>();
 		List<User> users = UserLocalServiceUtil.getUserGroupUsers(userGroupId);
 		for (User user : users) {
 			DynamicQuery query = DynamicQueryFactoryUtil
@@ -32,11 +32,10 @@ public class DLUsageReports {
 					.add(PropertyFactoryUtil.forName("groupId").eq(new Long(user.getGroupId())))
 					.setProjection(ProjectionFactoryUtil.sum("size"));
 			long totalSize = totalSize(query);
-			reportMap.put(user, totalSize);
-		System.out.println("###### USER:" + user.getGroupId());
+			usage.add(new DLUser(totalSize, user.getFullName()));
 		}
 		
-		return reportMap;
+		return usage;
 	}
 	
 	public static long getTotalUsageByUserGroupId(long companyId) throws SystemException {
