@@ -1,4 +1,4 @@
-package org.gnenc.liferay.portlet;
+package org.gnenc.dlusagereports.portlet;
 
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;

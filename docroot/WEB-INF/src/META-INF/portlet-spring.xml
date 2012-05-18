@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="org.gnenc.dlusagereports.service.AllocatedStorageLocalService" class="org.gnenc.dlusagereports.service.impl.AllocatedStorageLocalServiceImpl" />
+	<bean id="org.gnenc.dlusagereports.service.AllocatedStorageLocalServiceUtil" class="org.gnenc.dlusagereports.service.AllocatedStorageLocalServiceUtil">
+		<property name="service" ref="org.gnenc.dlusagereports.service.AllocatedStorageLocalService" />
+	</bean>
+	<bean id="org.gnenc.dlusagereports.service.persistence.AllocatedStoragePersistence" class="org.gnenc.dlusagereports.service.persistence.AllocatedStoragePersistenceImpl" parent="basePersistence" />
+</beans>

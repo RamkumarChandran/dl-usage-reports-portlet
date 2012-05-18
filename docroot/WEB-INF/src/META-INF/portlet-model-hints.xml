@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="org.gnenc.dlusagereports.model.AllocatedStorage">
+		<field name="id" type="long" />
+		<field name="totalBytes" type="long" />
+		<field name="ModifiedUserId" type="long" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+</model-hints>

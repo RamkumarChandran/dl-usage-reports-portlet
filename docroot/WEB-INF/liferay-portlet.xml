@@ -7,7 +7,7 @@
 		<icon>/icon.png</icon>
 		<control-panel-entry-category>portal</control-panel-entry-category>
 		<control-panel-entry-weight>4.1</control-panel-entry-weight>
-		<control-panel-entry-class>org.gnenc.liferay.portlet.DLUsageReportsControlPanelEntry</control-panel-entry-class>
+		<control-panel-entry-class>org.gnenc.dlusagereports.portlet.DLUsageReportsControlPanelEntry</control-panel-entry-class>
 		<instanceable>false</instanceable>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
